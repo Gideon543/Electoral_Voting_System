@@ -1,0 +1,9 @@
+
+Daniel Yeboah,Male,19,C1310-96801
+Kwame Nkrumah,Male,64,B7810-89567
+Delilah Thompson,Female,29,A9530-00687
+Daniel Yeboah,Male,19,V001
+Daniel Yeboah,Male,19,C1310-96801
+Kwame Nkrumah,Male,64,B7810-89567
+Delilah Thompson,Female,29,A9530-00687
+Daniel Yeboah,Male,19,V001

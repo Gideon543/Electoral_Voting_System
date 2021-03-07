@@ -14,7 +14,7 @@ public class Candidate extends Person{
     
     private String party; 		// political party instance variable
     private String candidate_no;	// candidate number instance variable
-
+	public Hashtable<String, Integer> parties = new Hashtable<String, Integer>();
     /**
 	 * Default Constructor
 	 */
@@ -76,6 +76,7 @@ public class Candidate extends Person{
 		System.out.println("Candidate is ineligible to ");}
 		else {
 		candidates.put(party, new Candidate(name, gender, age, party, candidateno));
+		parties.put(party,0);
 		FileWriter candidateslist = new FileWriter("Candidates.txt");
 		candidateslist.write(name + "," + gender + "," + age + "," + party + "," + candidateno);
 		candidateslist.close();

@@ -40,20 +40,32 @@ public class Voter extends Person {
    * 
    * @throws IOException
    **/
-  void register(String votername, String gender, int age, String voterID) throws IOException {
+  void register(String votername, String gender, int age, String voterID) {
     Voter v = (Voter) voters.get(voterID);
+    try(
+      FileWriter fw = new FileWriter("Project/Voters.txt", true);
+      BufferedWriter bw = new BufferedWriter (fw);
+      PrintWriter voterslist=new PrintWriter (bw);
+
+      FileWriter idfw = new FileWriter("Project/VoterIDs.txt", true);
+      BufferedWriter idbw = new BufferedWriter (idfw);
+      PrintWriter ids=new PrintWriter (idbw);
+    ){
     if (v != null) {
       System.out.println("Voter has already been registered");
     } else if (age<18){
       System.out.println("Voter is ineligible to vote");}
       else {
       voters.put(voterID, new Voter(votername, gender, age, voterID));
-      FileWriter voterslist = new FileWriter("Voters.txt");
-      FileWriter ids = new FileWriter("VoterIDs.txt");
-      voterslist.write(votername + "," + gender + "," + age + "," + voterID);
-      ids.write(voterID);
+
+
+      voterslist.write("\n"+votername + "," + gender + "," + age + "," + voterID);
+      ids.write("\n"+voterID);
       voterslist.close();
       ids.close();
+    }}
+    catch(IOException e){
+        
     }
   }
 
@@ -84,13 +96,10 @@ public class Voter extends Person {
 
   public static void main(String[] args) {
     Voter Voter1 = new Voter();
-    try {
-      Voter1.register("Daniel Yeboah", "Male", 19, "V001");
-      Voter1.register("Daniel Yeboah", "Male", 19, "V001");
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    Voter1.register("Daniel Yeboah", "Male", 19, "C1310-96801");
+    Voter1.register("Kwame Nkrumah", "Male", 64, "B7810-89567");
+    Voter1.register("Delilah Thompson", "Female", 29, "A9530-00687");
+    Voter1.register("Daniel Yeboah", "Male", 19, "V001");
     System.out.println("Welcome ");
   }
   
