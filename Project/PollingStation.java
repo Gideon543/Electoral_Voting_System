@@ -10,7 +10,7 @@ public class PollingStation {
     String[] allpollingids = { "C1310", "B7810", "A9530" };
     
 
-    public void vote(){
+    public void vote() throws IOException{
         Scanner sc= new Scanner(System.in);
         System.out.println("Please type your voter ID");
         String voterid=sc.nextLine();
@@ -37,41 +37,57 @@ public class PollingStation {
         }
     }
 
-    public boolean verify(String voterid){
+    public boolean verify(String voterid) throws IOException{
         boolean check=false;
-        try{  
-        BufferedReader reader=new BufferedReader(new FileReader("VoterIDs.txt"));
+         
+        FileInputStream reader= new FileInputStream("VoterIDs.txt");
+        Scanner sc=new Scanner(reader);
         String line;
         
-        while((line=reader.readLine())!=null) {
+        while(sc.hasNextLine()){
+            line=sc.nextLine();
             System.out.println(line);
             if (line.equals(voterid)){
-                reader.close();
+                
                 check= true;
             }
-            else{check=false;}
+           
         }
-    }
-    catch (IOException e){
-        System.out.println("Verification Complete");
-    }
+    reader.close();
     return check;
     }
 
-    public void collateresults(){
-        parties.put("NPP",0);
-        parties.put("NDC",0);
-    
-        Set<String> allvotes = votes.keySet();
-        Set<String> allparties = parties.keySet();
-        for(String voter: allvotes){
-            for(String key: allparties){
-                if(votes.get(voter).equals(key)){
-                    parties.put(key,parties.get(key)+1);
-                }
+    public void collateresults() throws IOException{
+        
+        for(String pstation:allpollingids){
+        
+        votes = new Hashtable<String, String>();
+        parties = new Hashtable<String, Integer>();
+           System.out.println(pstation);
+           parties.put("NPP",0);
+           parties.put("NDC",0);
+           FileInputStream preader= new FileInputStream("Project/PollingStations/"+pstation+".txt");
+           Scanner stationscanner=new Scanner(preader);
+            String ballots;
+        
+        while(stationscanner.hasNextLine()){
+            ballots=stationscanner.nextLine();
+            String[] parts=ballots.split(",");
+       
+            votes.put(parts[0],parts[1]);
             }
-        }
-        toString(parties);
+           
+           Set<String> allvotes = votes.keySet();
+           Set<String> allparties = parties.keySet();
+           for(String voter: allvotes){
+               for(String key: allparties){
+                   if(votes.get(voter).equals(key)){
+                       parties.put(key,parties.get(key)+1);
+                   }
+               }
+           }
+           toString(parties);
+           }
     }
 
     public String toString(Hashtable<String,Integer> partyname){
@@ -83,7 +99,7 @@ public class PollingStation {
         return null;
             
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         PollingStation station = new PollingStation();
         station.vote();
         station.collateresults();
