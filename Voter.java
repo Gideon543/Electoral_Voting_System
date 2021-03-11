@@ -1,13 +1,9 @@
-/**
- * 
- */
+
 package project1;
 
-
-//import java.util.Random;
-
 /**
- * @author Precious
+ * Represents a voter to participate in the elections in Ghana.
+ * @author Precious Njeck, Gabriel Owusu, Gideon Bonsu
  *
  */
 public class Voter {
@@ -17,19 +13,10 @@ public class Voter {
 	private int age;
 	private int voterID;
 	private boolean hasVoted = false;
-	//private int pollID;
-	
-	//static ArrayList <String> registeredVoters  = new ArrayList <String> ();
-
-	/**
-	 * 
-	 */
-	public Voter() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	
 	/**
+	 * Constructor for the Voter class
 	 * @param name
 	 * @param nationality
 	 * @param gender
@@ -46,43 +33,8 @@ public class Voter {
 	}
 	
 
-
 	/**
-	 * @param name
-	 * @param nationality
-	 * @param age
-	 */
-	public Voter(String name, String nationality, int age) {
-		this.name = name;
-		this.nationality = nationality;
-		this.age = age;
-	}
-
-
-	/**
-	 * @param name
-	 * @param gender
-	 */
-	
-	/*public boolean register() {
-		if(this.age>=18 && this.nationality== "Ghana") {
-			registeredVoters.add(this.name);
-			return true;
-		}
-		else {
-		System.out.println("Sorry! You are not eligible to register");
-		return false;
-		}
-		
-	}
-	
-	public boolean hasRegistered() {
-		if(register()) return true;
-		return false;
-	}
-	*/
-
-	/**
+	 * Gets a voter's ID
 	 * @return the voterID
 	 */
 	public int getVoterID() {
@@ -90,6 +42,7 @@ public class Voter {
 	}
 
 	/**
+	 * Changes a voter's ID
 	 * @param voterID the voterID to set
 	 */
 	public void setVoterID(int voterID) {
@@ -97,21 +50,7 @@ public class Voter {
 	}
 
 	/**
-	 * @return the pollingStation
-	 */
-	/*public int getPollID() {
-		return pollID;
-	}
-
-	/**
-	 * @param pollingStation the pollingStation to set
-	 
-	public void setPollingStation(int pollID) {
-		this.pollID = pollID;
-	}
-    */
-
-	/**
+	 * Gets a voter's name
 	 * @return the name
 	 */
 	public String getName() {
@@ -120,6 +59,7 @@ public class Voter {
 
 
 	/**
+	 * changes a voter's name
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -128,6 +68,7 @@ public class Voter {
 
 
 	/**
+	 * Gets a voter's nationality
 	 * @return the nationality
 	 */
 	public String getNationality() {
@@ -136,6 +77,7 @@ public class Voter {
 
 
 	/**
+	 * Changes a voter's nationality
 	 * @param nationality the nationality to set
 	 */
 	public void setNationality(String nationality) {
@@ -144,6 +86,7 @@ public class Voter {
 
 
 	/**
+	 * Gets a voter's gender
 	 * @return the gender
 	 */
 	public char getGender() {
@@ -152,6 +95,7 @@ public class Voter {
 
 
 	/**
+	 * changes a voter's gender
 	 * @param gender the gender to set
 	 */
 	public void setGender(char gender) {
@@ -160,6 +104,7 @@ public class Voter {
 
 
 	/**
+	 * Gets a voter's age
 	 * @return the age
 	 */
 	public int getAge() {
@@ -168,6 +113,7 @@ public class Voter {
 
 
 	/**
+	 * Changes a voter's age
 	 * @param age the age to set
 	 */
 	public void setAge(int age) {
@@ -176,6 +122,7 @@ public class Voter {
 
 
 	/**
+	 * Checks whether or not a voter has voted
 	 * @return the hasVoted
 	 */
 	public boolean getHasVoted() {
@@ -184,18 +131,12 @@ public class Voter {
 
 
 	/**
+	 * changes a voter's voting status
 	 * @param hasVoted the hasVoted to set
 	 */
 	public void setHasVoted(boolean hasVoted) {
 		this.hasVoted = hasVoted;
 	}
-	
-	
-	/*public static void viewVoters() {
-		for(String i:registeredVoters) {
-			System.out.println(i);
-		}
-	}*/
 
 	
 

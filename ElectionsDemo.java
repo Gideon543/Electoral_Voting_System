@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ElectionsDemo {
 
 	public ElectionsDemo() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public static void main(String[] args) {
@@ -143,7 +143,8 @@ public class ElectionsDemo {
 		poll20.registerVoter(voter50);
 		poll20.registerVoter(voter51);
 		
-		System.out.println(poll1.registeredVoters);
+		
+		System.out.println(poll1.getVoters());
 	   for(Pollingstation i: stations) {
 		i.registerCandidate(candidate1);
 		i.registerCandidate(candidate2);
@@ -151,7 +152,6 @@ public class ElectionsDemo {
 		i.registerCandidate(candidate4);
 	   }
 	
-		//System.out.println(Pollingstation.getCandidates());
 		
 		//poll1.vote(candidate3, voter1);
 		poll1.vote(candidate3, voter2);
@@ -217,27 +217,27 @@ public class ElectionsDemo {
 		
 		
 	
-		System.out.println(poll1.collateResults(cands));
+		System.out.println(poll1.collateResults());
 		
-		System.out.println(poll2.collateResults(cands));
-		System.out.println(poll3.collateResults(cands));
-		System.out.println(poll4.collateResults(cands));
-		System.out.println(poll5.collateResults(cands));
-		System.out.println(poll6.collateResults(cands));
-		System.out.println(poll7.collateResults(cands));
-		System.out.println(poll8.collateResults(cands));
-		System.out.println(poll9.collateResults(cands));
-		System.out.println(poll10.collateResults(cands));
-		System.out.println(poll11.collateResults(cands));
-		System.out.println(poll12.collateResults(cands));
-		System.out.println(poll13.collateResults(cands));
-		System.out.println(poll14.collateResults(cands));
-		System.out.println(poll15.collateResults(cands));
-		System.out.println(poll16.collateResults(cands));
-		System.out.println(poll17.collateResults(cands));
-		System.out.println(poll18.collateResults(cands));
-		System.out.println(poll19.collateResults(cands));
-		System.out.println(poll20.collateResults(cands));
+		System.out.println(poll2.collateResults());
+		System.out.println(poll3.collateResults());
+		System.out.println(poll4.collateResults());
+		System.out.println(poll5.collateResults());
+		System.out.println(poll6.collateResults());
+		System.out.println(poll7.collateResults());
+		System.out.println(poll8.collateResults());
+		System.out.println(poll9.collateResults());
+		System.out.println(poll10.collateResults());
+		System.out.println(poll11.collateResults());
+		System.out.println(poll12.collateResults());
+		System.out.println(poll13.collateResults());
+		System.out.println(poll14.collateResults());
+		System.out.println(poll15.collateResults());
+		System.out.println(poll16.collateResults());
+		System.out.println(poll17.collateResults());
+		System.out.println(poll18.collateResults());
+		System.out.println(poll19.collateResults());
+		System.out.println(poll20.collateResults());
 		
 		
 		ArrayList<Pollingstation> dist1 = new ArrayList<Pollingstation>();
@@ -275,7 +275,7 @@ public class ElectionsDemo {
 		DistrictOffice district1 = new DistrictOffice(111, "district1", "Bamenda", dist1);
 		DistrictOffice district2 = new DistrictOffice(112, "district2", "Cape Coast", dist2);
 		DistrictOffice district3 = new DistrictOffice(113, "district3", "Cantonments", dist3);
-		DistrictOffice district4 = new DistrictOffice(114, "district4", "Accra", dist4);
+		DistrictOffice district4 = new DistrictOffice(114, "district4", "Achimota", dist4);
 		DistrictOffice district5 = new DistrictOffice(115, "district5", "Kwabena", dist5);
 		DistrictOffice district6 = new DistrictOffice(116, "district6", "Lapaz", dist6);
 		DistrictOffice district7 = new DistrictOffice(117, "district7", "Batibo", dist7);
@@ -326,7 +326,7 @@ public class ElectionsDemo {
 		nation.add(region3);
 		nation.add(region4);
 		
-		NationalOffice national = new NationalOffice("Ghana", nation);
+		NationalOffice national = new NationalOffice(12345,"Ghana", "Accra", nation);
 		
 		System.out.println(national.collateResults());
 	}

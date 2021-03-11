@@ -3,53 +3,50 @@ package project1;
 import java.util.ArrayList;
 
 import java.util.HashMap;
-//import java.util.Map.Entry;
 
-public class NationalOffice  {
-	private String name;
+/**
+ * The national office is an office
+ * Collates results from all regional offices in the nation
+ * @author Precious Njeck, Gabriel Owusu, Gideon Bonsu
+ *
+ */
+public class NationalOffice extends Office  {
+	//stores all the regions in the nation
 	ArrayList <RegionalOffice> regions  = new ArrayList <RegionalOffice> ();
-	HashMap<String, Integer> NationalResults = new HashMap<String, Integer>();
-	
-	
+	//stores the election results
+	private HashMap<String, Integer> NationalResults = new HashMap<String, Integer>();
+
+
 	/**
+	 * National office constructor
+	 * @param ID
 	 * @param name
-	 * @param regions
+	 * @param location
 	 */
-	public NationalOffice(String name, ArrayList<RegionalOffice> regions) {
-		this.name = name;
+	public NationalOffice(int ID, String name, String location, ArrayList <RegionalOffice> regions ) {
+		super(ID, name, location);
 		this.regions = regions;
 	}
 
 
-
 	public HashMap<String, Integer> collateResults(){
-		//int count = 0;
-		
-			for(RegionalOffice reg: regions) {
-				reg.RegionalResults.forEach((key, value) -> NationalResults.merge(key, value, (v1, v2) -> v1+v2));	
-				
-			}
-			return NationalResults;
-			
-	}
-	
+		for(RegionalOffice reg: regions) {
+			reg.RegionalResults.forEach((key, value) -> NationalResults.merge(key, value, (v1, v2) -> v1+v2));	
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+		}
+		System.out.println(this.getName());
+		return NationalResults;
+
 	}
 
 
 	/**
-	 * @param name the name to set
+	 * Gets the national results
+	 * @return the nationalResults
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public HashMap<String, Integer> getNationalResults() {
+		return NationalResults;
 	}
-	
-	
 
 
 }

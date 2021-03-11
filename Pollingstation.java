@@ -13,112 +13,129 @@ import java.util.LinkedHashMap;
 
 
 /**
- * @author Precious
+ * Each Polling station is an office
+ * Registration of candidates and voters as well as voting take place here
+ * @author Precious Njeck, Gabriel Owusu, Gideon Bonsu
  *
  */
-public class Pollingstation {
-	private int pollID;
-	private String name;
-	private String location;
-	private int districtID;
+public class Pollingstation extends Office implements Eligible{
 	
-	private static boolean value2; // for hasRegistered voter
-	private static boolean value3; // for hasRegistered Candidate
-	 HashMap<String, Integer> pollresults = new HashMap<String, Integer>();
+	private static boolean value1; // for hasRegisteredvoter
+	private static boolean value2; // for hasRegisteredCandidate
+	HashMap<String, Integer> pollresults = new HashMap<String, Integer>();
 	
-	 ArrayList <Integer> registeredVoters  = new ArrayList <Integer> ();
-	static LinkedHashMap<String, String> candidates = new LinkedHashMap<String, String>();
+	ArrayList <Integer> registeredVoterIDs  = new ArrayList <Integer> ();// stores all the IDs of voters
+	private LinkedHashMap<String, Integer> voters = new LinkedHashMap<String, Integer>(); //stores voter information
+	static LinkedHashMap<String, String> candidates = new LinkedHashMap<String, String>();//stores candidate information
 	
 	
 
+	
 	/**
-	 * 
-	 */
-	public Pollingstation() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param pollID
+	 * Constructor for polling station class
+	 * @param ID
 	 * @param name
+	 * @param location
 	 */
-	public Pollingstation(int pollID, String name, String location) {
-		this.pollID = pollID;
-		this.name = name;
-		this.location= location;
-		
-		
-		
+	public Pollingstation(int ID, String name, String location) {
+		super(ID, name, location);
 		
 	}
+	
+	/**
+	 * Registers eligible voters
+	 *@param voter
+	 *@return boolean  value
+	 */
 	public  boolean registerVoter(Voter voter) {
 		if(voter.getAge()>=18 && voter.getNationality()== "Ghana") {
 			
-				registeredVoters.add(voter.getVoterID());
-				value2 = true;
+				registeredVoterIDs.add(voter.getVoterID());
+				voters.put(voter.getName(), voter.getVoterID());
+				value1 = true; //hasRegisteredVoter() = true
 				
 			
 			return true;
 		}
 		else {
-		System.out.println("Sorry! You are not eligible to register");
-		value2 = false;
+		value1 = false; //hasRegisteredVoter() = false
 		return false;
 		}
 		
 	}
-	
+
+	/**
+	 * Check whether a voter has registered
+	 *@return boolean value
+	 */
 	public boolean hasRegisteredVoter() {
-		if(value2) return true;
+		if(value1) return true;
 		return false;
 	}
 	
+	/**
+	 * Registers eligible candidates to run for elections
+	 *@param candidate
+	 *@return boolean value
+	 */
 	public boolean registerCandidate(Candidate candidate) {
 		if(candidate.getAge()>=40 && candidate.getNationality()=="Ghana") {
 			candidates.put(candidate.getPoliticalParty(), candidate.getName());
 			pollresults.put(candidate.getName(),0);
 			
-			value3 = true;
+			value2 = true; //hasRegisteredCandidate() = true
 			return true;
 		}
 
 		else {
-			
-			//hasRegistered() = false;
-			value3 = false;
+			value2 = false; //hasRegisteredCandidate() = false
 			return false;
 		}
 	}
 	
 	
-
-	
+	/**
+	 * Checks a candidate's registration status
+	 * @return boolean value
+	 */
 	public boolean hasRegisteredCandidate() {
-		if(value3) return true;
+		if(value2) return true;
 		return false;
 	}
 	
+	/**
+	 * Enables a voter to vote for their preferred candidate
+	 * @param candidate
+	 * @param voter
+	 * @return boolean value
+	 */
 	public boolean vote(Candidate candidate, Voter voter) {
 		if(verify(voter)) {
 			if(voter.getHasVoted() == false) {
 				int currentCount = pollresults.get(candidate.getName());
 				currentCount++;
-				
+
 				pollresults.replace(candidate.getName(), currentCount);
-				
+
+
 				voter.setHasVoted(true);
-				
+
 				return true;
 			}
-			
+
 		}
-		
+
 		return false;
 	}
-	// if(candidate.getname==pollresults.getkey)
+
 	
+	/**
+	 * verifies whether a voter has registered by checking if their ID is in records
+	 * @param voter
+	 * @return boolean value
+	 */
 	private boolean verify(Voter voter){
-		if(registeredVoters.contains(voter.getVoterID())) {
+		if(registeredVoterIDs.contains(voter.getVoterID())) {
 			return true;
 		}
 		return false;
@@ -127,68 +144,13 @@ public class Pollingstation {
 	}
 	
 
-	
-	public HashMap<String, Integer> collateResults(ArrayList<Candidate> cands){
+	/**
+	 * Sums and shows election results at each polling station
+	 *@return poll results
+	 */
+	public HashMap<String, Integer> collateResults(){
 
-		System.out.println(this.name);
 		return pollresults;
-	}
-	
-
-	/**
-	 * @return the pollID
-	 */
-	public int getPollID() {
-		return pollID;
-	}
-
-	/**
-	 * @param pollID the pollID to set
-	 */
-	public void setPollID(int pollID) {
-		this.pollID = pollID;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the districtID
-	 */
-	public int getDistrictID() {
-		return districtID;
-	}
-
-	/**
-	 * @param districtID the districtID to set
-	 */
-	public void setDistrictID(int districtID) {
-		this.districtID = districtID;
-	}
-
-	/**
-	 * @return the location
-	 */
-	public String getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(String location) {
-		this.location = location;
 	}
 	
 
@@ -205,13 +167,23 @@ public class Pollingstation {
 	public static LinkedHashMap<String, String> getCandidates() {
 		return candidates;
 	}
+
+	/**
+	 * @return the voters
+	 */
+	public LinkedHashMap<String, Integer> getVoters() {
+		return voters;
+	}
+
+	/**
+	 * @param voters the voters to set
+	 */
+	public void setVoters(LinkedHashMap<String, Integer> voters) {
+		this.voters = voters;
+	}
 	
 	
 
 }
 
-/*
- * each district should have a list of poll ids
- * if your id is in that district, results from that poll are sent there
- * have a list for all the votes a candidate receives at every poll
- */
+
