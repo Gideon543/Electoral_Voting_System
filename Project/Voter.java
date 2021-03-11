@@ -34,8 +34,7 @@ public class Voter extends Person {
       return voter;
     }
   }
-
-  /**
+/**
    * Register a voter
    * 
    * @throws IOException
